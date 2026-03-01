@@ -1,0 +1,118 @@
+<body onload='
+// Reset the textarea value
+m.value="00";
+
+// Init the top cell content
+for(i=0;i<16;i++)
+  t.innerHTML+=(0+i.toString(16)).slice(-2)+ " ";
+'>
+<table border>
+    <td>
+        <pre></pre>
+    <td id=t>
+        <tr>
+    <td id=l width=60>00000000
+    <td>
+<textarea spellcheck=false id=m oninput='refresh();'
+          cols=48></textarea>
+    <td width=120 id=r>.</td>
+</table>
+
+<style>
+    *{margin:0;padding:0;vertical-align:top;font:1em/1em courier;font-size: 12px;}
+    table{
+    white-space: nowrap;
+    }
+    #m{height:1.5em;resize:none;overflow:hidden}
+    #t{padding:0 2px}
+    #w{position:absolute;opacity:.001}
+</style>
+</body>
+<script>
+    const hexToDecimalMap = new Map([
+  ['0', 0],
+  ['1', 1],
+  ['2', 2],
+  ['3', 3],
+  ['4', 4],
+  ['5', 5],
+  ['6', 6],
+  ['7', 7],
+  ['8', 8],
+  ['9', 9],
+  ['A', 10],
+  ['B', 11],
+  ['C', 12],
+  ['D', 13],
+  ['E', 14],
+  ['F', 15],
+  ['a', 10],
+  ['b', 11],
+  ['c', 12],
+  ['d', 13],
+  ['e', 14],
+  ['f', 15]
+]);
+</script>
+<script>
+    function refresh() {
+	// On input, store the length of clean hex before the textarea caret in b
+	var m = document.getElementById('m');
+	var l = document.getElementById('l');
+	var r = document.getElementById('r');
+	var value = m.value;
+	b = value.substr(0, m.selectionStart).replace(/[^0-9A-F]/ig, "").replace(/(..)/g, "$1 ").length;
+
+	// Clean the textarea value
+	m.value = value.replace(/[^0-9A-F]/ig, "").replace(/(..)/g, "$1 ").replace(/ $/, "").toUpperCase();
+
+	value = m.value;
+
+	// Set the height of the textarea according to its length
+	m.style.height = (1.5 + value.length / 47) + "em";
+
+	// Reset h
+	h = "";
+
+	// Loop on textarea lines
+	for (i = 0; i < value.length / 48; i++)
+
+	// Add line number to h
+	h += (1E7 + (16 * i).toString(16)).slice( - 8) + "<br>";
+
+	// Write h on the left column
+	l.innerHTML = h;
+
+	// Reset h
+	h = "";
+
+	// Loop on the hex values
+	for (i = 0; i < value.length; i += 3) {
+
+		// Convert them in numbers
+		c = (hexToDecimalMap.get(value.charAt(i)) << 4) + hexToDecimalMap.get(value.charAt(i + 1));;
+		if ((c >= 0 && c < 32) || c == 127) {
+			h = h + ".";
+		} else {
+			h = h + String.fromCharCode(c);
+		}
+
+		// If the caret position is after a space or a line break, place it at the previous index so we can use backspace to erase hex code
+		if (m.value[b] == " ") b--;
+
+		// Put the textarea caret at the right place
+		m.setSelectionRange(b, b)
+	}
+	// Write h in the right column (with line breaks every 16 chars)
+	r.innerText = h.replace(/(.{16})/g, "$1\n");
+}
+function setInputValue(bytes) {
+	var element = document.getElementById('m');
+	element.value = bytes;
+	refresh();
+}
+function getInputValue() {
+	var element = document.getElementById('m');
+	return element.value;
+}
+</script>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="732.0" prefWidth="1172.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.t3stzer0.jspobfuscator.core.ui.controller.MainController">
+    <children>
+        <MenuBar fx:id="MenuBar" VBox.vgrow="NEVER">
+            <menus>
+                <Menu fx:id="MenuGadgets1" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#Generate" text="Generate"/>
+                        <MenuItem mnemonicParsing="false" text="Save" onAction="#SaveFile"/>
+                    </items>
+                </Menu>
+                <Menu fx:id="MenuGadgets" mnemonicParsing="false" text="Gadgets">
+                    <items>
+                    </items>
+                </Menu>
+
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="MiHelpAbout" mnemonicParsing="false" text="About" onAction="#About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="749.0" prefWidth="1184.0" VBox.vgrow="ALWAYS">
+            <children>
+                <TableView fx:id="TableViewEditPage" layoutX="27.0" layoutY="183.0" prefHeight="472.0" prefWidth="528.0"
+                           AnchorPane.leftAnchor="27.0">
+                    <columns>
+                        <TableColumn prefWidth="527.0" text="EditPage"/>
+                    </columns>
+                </TableView>
+                <TableView fx:id="TableViewPageFactory" layoutX="27.0" layoutY="22.0" prefHeight="130.0"
+                           prefWidth="259.0">
+                    <columns>
+                        <TableColumn prefWidth="256.6666564941406" text="PageFactory"/>
+                    </columns>
+                </TableView>
+                <TableView fx:id="TableViewOutputPage" layoutX="312.0" layoutY="22.0" prefHeight="130.0"
+                           prefWidth="243.0">
+                    <columns>
+                        <TableColumn prefWidth="242.0" text="OutputPage"/>
+                    </columns>
+                </TableView>
+                <TabPane fx:id="InputTabPane" layoutX="586.0" layoutY="22.0" prefHeight="310.0" prefWidth="558.0"
+                         tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="40.0">
+                    <tabs>
+                        <Tab text="Code">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <WebView fx:id="WebViewInputCode" layoutX="-2.0" prefHeight="293.0"
+                                                 prefWidth="558.0" AnchorPane.bottomAnchor="0.0"
+                                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                 AnchorPane.topAnchor="0.0"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Include">
+                            <content>
+                                <WebView fx:id="WebViewInputInclude" prefHeight="249.0" prefWidth="558.0"/>
+                            </content>
+                        </Tab>
+                        <Tab text="Declaration">
+                            <content>
+                                <WebView fx:id="InputDeclaration" prefHeight="249.0" prefWidth="558.0"/>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <TabPane fx:id="OutputTabPane" layoutX="586.0" layoutY="340.0" prefHeight="310.0" prefWidth="558.0"
+                         tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="586.0" AnchorPane.rightAnchor="40.0">
+                    <tabs>
+                        <Tab text="Text">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <WebView fx:id="WebViewOutputText" prefHeight="309.0" prefWidth="558.0"
+                                                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Hex">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <WebView fx:id="WebViewOutputHex" prefHeight="311.0" prefWidth="558.0"
+                                                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                                 AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
